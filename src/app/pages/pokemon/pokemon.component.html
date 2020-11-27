@@ -1,0 +1,60 @@
+<div class="flex-container">
+  <div>
+    <mat-card class="example-card">
+      <img *ngIf="!pokemon.id" mat-card-image src="assets/images/avatar_pokemon.jpg" alt="Photo of a Shiba Inu">
+      <img *ngIf="pokemon.id" mat-card-image [src]="pokemon.sprites.other.dream_world.front_default"
+           alt="Photo of a Shiba Inu" height="300px">
+      <mat-card-content>
+        <img *ngIf="pokemon.sprites.front_default" [src]="pokemon.sprites.front_default" alt="front_default">
+        <img *ngIf="pokemon.sprites.back_default" [src]="pokemon.sprites.back_default" alt="back_default">
+        <img *ngIf="pokemon.sprites.front_female" [src]="pokemon.sprites.front_female" alt="front_female">
+        <img *ngIf="pokemon.sprites.back_female" [src]="pokemon.sprites.back_female" alt="back_female">
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div>
+    <mat-card class="example-card">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item><b>ID: </b> {{pokemon.id}} </mat-list-item>
+          <mat-list-item><b>Name: </b> {{pokemon.name}} </mat-list-item>
+          <mat-list-item><b>Height: </b> {{pokemon.height}} </mat-list-item>
+          <mat-list-item><b>Weigth: </b> {{pokemon.weight}} </mat-list-item>
+          <mat-list-item><b>Order: </b> {{pokemon.order}} </mat-list-item>
+          <mat-list-item><b>Base Experience: </b> {{pokemon.base_experience}} </mat-list-item>
+          <mat-list-item><b>Abilities: </b>
+            <mat-list-item *ngFor="let ability of pokemon.abilities">{{ability.ability.name}}</mat-list-item>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div class="flex-container">
+  <div class="tabla">
+    <table mat-table [dataSource]="pokemons" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="url">
+        <th mat-header-cell *matHeaderCellDef> URL</th>
+        <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef> Select</th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="getPokemon(element.name)" mat-raised-button
+                  [color]="pokemon.name===element.name?'primary':''">Select
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="resultsLength" [pageSize]="5"></mat-paginator>
+  </div>
+</div>

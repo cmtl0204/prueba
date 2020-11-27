@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  height: 450px;
+  justify-content: center;
+  padding: 10px;
+}
+
+.flex-container div {
+  width: 700px;
+  margin: 5px;
+  line-height: 5px;
+}
+
+.flex-container .tabla {
+  width: 80%;
+  margin: 10px;
+  line-height: 75px;
+}
+
+.example-card {
+  max-width: 400px;
+  max-height: 400px;
+}
